@@ -26,8 +26,10 @@ Of course, your expense report is much larger. Find the two entries that sum to 
 */
 
 import { readFile } from 'fs/promises';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-let input = await readFile('./input.txt');
+let input = await readFile(join(dirname(fileURLToPath(import.meta.url)), '/input.txt'));
 if (!input || input.toString().trim().length < 1) throw 'No input file found.';
 
 input = input.toString().trim().split('\r\n').map(e => Number(e));

@@ -79,7 +79,7 @@ let first = true;
 
 const encounteredTreesPerSlope = [];
 
-slopesToCheck.forEach(slope => {
+for (const slope of slopesToCheck) {
     const rows = input.toString().trim().split('\r\n');
     const toAdd = slope[0];
 
@@ -102,6 +102,6 @@ slopesToCheck.forEach(slope => {
     console.log(`Encountered trees for slope ${slope.join(', ')}: ${encounteredTrees}${first == true ? ' (answer for part one)' : ''}`);
 
     if (first) first = false;
-});
+};
 
 console.log(`The number that adds up if you multiply together the number of trees encountered on each of the listed slopes: ${encounteredTreesPerSlope.reduce((a, b) => a * b)} (answer for part two)`);

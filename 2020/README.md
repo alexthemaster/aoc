@@ -5,3 +5,4 @@
 ## [Day 1](./day1) - Report Repair
 ## [Day 2](./day2) - Password Philosophy
 ## [Day 3](./day3) - Toboggan Trajectory
+## [Day 4](./day4) - Passport Processing

@@ -23,14 +23,14 @@ import { readFile } from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-let input = await readFile(join(dirname(fileURLToPath(import.meta.url)), '/input.txt'));
+const input = await readFile(join(dirname(fileURLToPath(import.meta.url)), '/input.txt'));
 if (!input || input.toString().trim().length < 1) throw 'No input file found.';
 
-input = input.toString().trim().split('\r\n');
+const passwords = input.toString().trim().split('\r\n');
 
 let valid = 0;
 
-for (const password of input) {
+for (const password of passwords) {
     const minimum = password.split('-')[0];
     const maximum = password.split('-')[1].split(' ')[0];
     const letter = password.split(' ')[1].split(':')[0];
@@ -62,7 +62,7 @@ How many passwords are valid according to the new interpretation of the policies
 
 let valid2 = 0;
 
-for (const password of input) {
+for (const password of passwords) {
     const index1 = password.split('-')[0] - 1;
     const index2 = password.split('-')[1].split(' ')[0] - 1;
     const letter = password.split(' ')[1].split(':')[0];

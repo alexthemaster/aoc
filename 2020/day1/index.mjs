@@ -29,18 +29,18 @@ import { readFile } from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
-let input = await readFile(join(dirname(fileURLToPath(import.meta.url)), '/input.txt'));
+const input = await readFile(join(dirname(fileURLToPath(import.meta.url)), '/input.txt'));
 if (!input || input.toString().trim().length < 1) throw 'No input file found.';
 
-input = input.toString().trim().split('\r\n').map(e => Number(e));
+const expenseReport = input.toString().trim().split('\r\n').map(e => Number(e));
 
 let number1, number2, number3;
 
-for (let i = 0; i < input.length; i++) {
-    for (let j = 0; j < input.length; j++) {
-        if (input[i] + input[j] == 2020) {
-            number1 = input[i];
-            number2 = input[j];
+for (let i = 0; i < expenseReport.length; i++) {
+    for (let j = 0; j < expenseReport.length; j++) {
+        if (expenseReport[i] + expenseReport[j] == 2020) {
+            number1 = expenseReport[i];
+            number2 = expenseReport[j];
             break;
         }
     }
@@ -57,13 +57,13 @@ Using the above example again, the three entries that sum to 2020 are 979, 366, 
 In your expense report, what is the product of the three entries that sum to 2020?
 */
 
-for (let i = 0; i < input.length; i++) {
-    for (let j = 0; j < input.length; j++) {
-        for (let k = 0; k < input.length; k++) {
-            if (input[i] + input[j] + input[k] == 2020) {
-                number1 = input[i];
-                number2 = input[j];
-                number3 = input[k];
+for (let i = 0; i < expenseReport.length; i++) {
+    for (let j = 0; j < expenseReport.length; j++) {
+        for (let k = 0; k < expenseReport.length; k++) {
+            if (expenseReport[i] + expenseReport[j] + expenseReport[k] == 2020) {
+                number1 = expenseReport[i];
+                number2 = expenseReport[j];
+                number3 = expenseReport[k];
                 break;
             }
         }

@@ -44,7 +44,6 @@ According to the above rules, your improved system would report 2 valid passport
 Count the number of valid passports - those that have all required fields. Treat cid as optional. In your batch file, how many passports are valid?
 */
 
-import { notStrictEqual } from 'assert';
 import { readFile } from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';

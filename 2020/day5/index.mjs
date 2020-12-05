@@ -45,7 +45,6 @@ for (let i = 0; i < seats.length; i++) {
 console.log(`The ID of your seat is ${ownSeat} (answer for part two)`);
 
 function processRow(row) {
-    row = row.split('');
     let rowPosition;
     let range0 = 0;
     let range1 = rowNumber;
@@ -61,7 +60,6 @@ function processRow(row) {
 }
 
 function processColumn(column) {
-    column = column.split('');
     let columnPosition;
     let range0 = 0;
     let range1 = columnNumber;

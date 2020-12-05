@@ -15,7 +15,7 @@ const columnLowerHalf = 'L';
 const rowNumber = 127;
 const columnNumber = 7;
 
-let seats = [];
+const seats = [];
 
 for (const pass of boardingPasses) {
     const row = pass.slice(0, -3);

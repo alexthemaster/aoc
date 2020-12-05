@@ -37,11 +37,9 @@ console.log(`The highest seat ID is ${highestSeatID} (answer for part one)`);
 // Part two
 let ownSeat;
 for (let i = 0; i < seats.length; i++) {
-    for (let j = 0; j < seats.length; j++) {
-        if (!seats.some(seat => seat == seats[i] + 1) && seats.some(seat => seat == seats[i] + 2)) {
-            ownSeat = seats[i] + 1;
-            break;
-        }
+    if (!seats.some(seat => seat == seats[i] + 1) && seats.some(seat => seat == seats[i] + 2)) {
+        ownSeat = seats[i] + 1;
+        break;
     }
 }
 

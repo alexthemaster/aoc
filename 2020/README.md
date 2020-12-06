@@ -7,3 +7,4 @@
 ## [Day 3](./day3) - Toboggan Trajectory
 ## [Day 4](./day4) - Passport Processing
 ## [Day 5](./day5) - Binary Boarding
+## [Day 6](./day6) - Custom Customs

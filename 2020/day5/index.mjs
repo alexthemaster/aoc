@@ -15,34 +15,38 @@ const columnLowerHalf = 'L';
 const rowNumber = 127;
 const columnNumber = 7;
 
-const seats = [];
+export function day5() {
+    const seats = [];
 
-for (const pass of boardingPasses) {
-    const row = pass.slice(0, -3);
-    const column = pass.slice(-3);
+    for (const pass of boardingPasses) {
+        const row = pass.slice(0, -3);
+        const column = pass.slice(-3);
 
-    const rowPosition = processRow(row);
-    const columnPosition = processColumn(column);
+        const rowPosition = processRow(row);
+        const columnPosition = processColumn(column);
 
-    const seatID = rowPosition * 8 + columnPosition;
+        const seatID = rowPosition * 8 + columnPosition;
 
-    seats.push(seatID);
-}
-
-const highestSeatID = seats.reduce((a, b) => a > b ? a : b);
-
-console.log(`The highest seat ID is ${highestSeatID} (answer for part one)`);
-
-// Part two
-let ownSeat;
-for (let i = 0; i < seats.length; i++) {
-    if (!seats.some(seat => seat == seats[i] + 1) && seats.some(seat => seat == seats[i] + 2)) {
-        ownSeat = seats[i] + 1;
-        break;
+        seats.push(seatID);
     }
-}
 
-console.log(`The ID of your seat is ${ownSeat} (answer for part two)`);
+    const highestSeatID = seats.reduce((a, b) => a > b ? a : b);
+
+    const partOne = highestSeatID;
+
+    // Part two
+    let ownSeat;
+    for (let i = 0; i < seats.length; i++) {
+        if (!seats.some(seat => seat == seats[i] + 1) && seats.some(seat => seat == seats[i] + 2)) {
+            ownSeat = seats[i] + 1;
+            break;
+        }
+    }
+
+    const partTwo = ownSeat;
+
+    return { partOne, partTwo };
+}
 
 function processRow(row) {
     let rowPosition;

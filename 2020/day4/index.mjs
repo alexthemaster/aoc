@@ -11,40 +11,43 @@ const passports = input.toString().trim().split(/\n\s*\n/).map(passport => passp
 // Thanks Royi for the regex https://stackoverflow.com/a/8027444
 const hexRegex = /^#[0-9A-F]{6}$/i;
 
-let validPassports = 0;
+export function day4() {
+    let validPassports = 0;
 
-for (const passport of passports) {
-    const [birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportID] = getInfo(passport);
+    for (const passport of passports) {
+        const [birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportID] = getInfo(passport);
 
-    if (!birthYear || !issueYear || !expirationYear || !height || !hairColor || !eyeColor || !passportID) continue;
-    validPassports++;
+        if (!birthYear || !issueYear || !expirationYear || !height || !hairColor || !eyeColor || !passportID) continue;
+        validPassports++;
+    }
+
+    const partOne = validPassports;
+
+    // Part two
+    validPassports = 0;
+
+    const validEyeColors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'];
+
+    for (const passport of passports) {
+        const [birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportID] = getInfo(passport);
+
+        if (!birthYear || !issueYear || !expirationYear || !height || !hairColor || !eyeColor || !passportID) continue;
+
+        if (
+            (birthYear >= 1920 && birthYear <= 2002) &&
+            (issueYear >= 2010 && issueYear <= 2020) &&
+            (expirationYear >= 2020 && expirationYear <= 2030) &&
+            (height.endsWith('cm') ? parseInt(height) >= 150 && parseInt(height) <= 193 : parseInt(height) >= 59 && parseInt(height) <= 76) &&
+            (hexRegex.test(hairColor)) &&
+            (validEyeColors.some(color => color == eyeColor)) &&
+            (!isNaN(passportID) && passportID.length == 9)
+        ) validPassports++;
+    }
+
+    const partTwo = validPassports;
+
+    return { partOne, partTwo };
 }
-
-console.log(`Valid passports for part one: ${validPassports}`);
-
-// Part two
-validPassports = 0;
-
-const validEyeColors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'];
-
-for (const passport of passports) {
-    const [birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportID] = getInfo(passport);
-
-    if (!birthYear || !issueYear || !expirationYear || !height || !hairColor || !eyeColor || !passportID) continue;
-
-    if (
-        (birthYear >= 1920 && birthYear <= 2002) &&
-        (issueYear >= 2010 && issueYear <= 2020) &&
-        (expirationYear >= 2020 && expirationYear <= 2030) &&
-        (height.endsWith('cm') ? parseInt(height) >= 150 && parseInt(height) <= 193 : parseInt(height) >= 59 && parseInt(height) <= 76) &&
-        (hexRegex.test(hairColor)) &&
-        (validEyeColors.some(color => color == eyeColor)) &&
-        (!isNaN(passportID) && passportID.length == 9)
-    ) validPassports++;
-}
-
-console.log(`Valid passports for part two: ${validPassports}`);
-
 
 function getInfo(passport) {
     const birthYear = parseInfo(passport, 'byr:');

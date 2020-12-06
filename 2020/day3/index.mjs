@@ -8,33 +8,41 @@ if (!input || input.toString().trim().length < 1) throw 'No input file found.';
 const tree = '#';
 
 const slopesToCheck = [[3, 1], [1, 1], [5, 1], [7, 1], [1, 2]];
-let first = true;
 
-const encounteredTreesPerSlope = [];
+export function day3() {
+    let first = true;
+    let partOne;
 
-for (const slope of slopesToCheck) {
-    const rows = input.toString().trim().split('\r\n');
-    const toAdd = slope[0];
+    const encounteredTreesPerSlope = [];
 
-    let position = 0;
-    let encounteredTrees = 0;
+    for (const slope of slopesToCheck) {
+        const rows = input.toString().trim().split('\r\n');
+        const toAdd = slope[0];
 
-    while (rows.length) {
-        let row = rows[0].split('');
+        let position = 0;
+        let encounteredTrees = 0;
 
-        if (position > row.length - 1) position = position - row.length;
-        if (row[position] === tree) encounteredTrees++;
+        while (rows.length) {
+            let row = rows[0].split('');
 
-        position += toAdd;
+            if (position > row.length - 1) position = position - row.length;
+            if (row[position] === tree) encounteredTrees++;
 
-        if (slope[1] == 2) rows.shift();
-        rows.shift();
+            position += toAdd;
+
+            if (slope[1] == 2) rows.shift();
+            rows.shift();
+        };
+
+        encounteredTreesPerSlope.push(encounteredTrees);
+
+        if (first) {
+            partOne = encounteredTrees;
+            first = false;
+        }
     };
 
-    encounteredTreesPerSlope.push(encounteredTrees);
-    console.log(`Encountered trees for slope ${slope.join(', ')}: ${encounteredTrees}${first == true ? ' (answer for part one)' : ''}`);
+    const partTwo = encounteredTreesPerSlope.reduce((a, b) => a * b);
 
-    if (first) first = false;
-};
-
-console.log(`The number that adds up if you multiply together the number of trees encountered on each of the listed slopes: ${encounteredTreesPerSlope.reduce((a, b) => a * b)} (answer for part two)`);
+    return { partOne, partTwo };
+}

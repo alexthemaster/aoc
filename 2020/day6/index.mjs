@@ -6,37 +6,37 @@ const input = await readFile(join(dirname(fileURLToPath(import.meta.url)), '/inp
 if (!input || input.toString().trim().length < 1) throw 'No input file found.';
 
 // Thanks Vasiliy for the regex https://stackoverflow.com/a/37513639
-const answers = input.toString().trim().split(/\n\s*\n/).map(answer => answer.replace(/\r/g, '').replace(/\n/g, ' '));
+const totalAnswers = input.toString().trim().split(/\n\s*\n/).map(answer => answer.replace(/\r/g, '').replace(/\n/g, ' '));
 
 let sum = 0;
 
-for (let answer of answers) {
+for (let groupAnswers of totalAnswers) {
     // We create a new Set and then convert it back to an array to remove duplicate letters
-    answer = [...new Set(answer.split(''))].filter(answer => answer !== ' ');
-    sum += answer.length;
+    groupAnswers = [...new Set(groupAnswers.split(''))].filter(answer => answer !== ' ');
+    sum += groupAnswers.length;
 }
 
 console.log(`The sum of the counts is ${sum} (answer for part one)`);
 
 // Part two
 sum = 0;
-const answers2 = answers.map(answer => answer.split(' '));
+const answers2 = totalAnswers.map(answer => answer.split(' '));
 
-for (let answer of answers2) {
-    const people = answer.length;
-    if (people == 1) { sum += answer[0].split('').length; continue; }
+for (const groupAnswers of answers2) {
+    const groupSize = groupAnswers.length;
+    if (groupSize == 1) { sum += groupAnswers[0].split('').length; continue; }
 
-    const answers = {};
-    answer.forEach(answered => {
-        answered = answered.split('');
-        answered.map(ans => {
-            if (!answers[ans]) answers[ans] = 0;
-            answers[ans]++;
+    const totalAnswers = {};
+    groupAnswers.forEach(answers => {
+        answers = answers.split('');
+        answers.map(answer => {
+            if (!totalAnswers[answer]) totalAnswers[answer] = 0;
+            totalAnswers[answer]++;
         })
     });
 
-    for (const ans in answers) {
-        if (answers[ans] == people) sum += 1
+    for (const answer in totalAnswers) {
+        if (totalAnswers[answer] == groupSize) sum += 1
     }
 }
 

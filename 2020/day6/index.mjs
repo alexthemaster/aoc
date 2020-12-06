@@ -22,6 +22,22 @@ console.log(`The sum of the counts is ${sum} (answer for part one)`);
 sum = 0;
 const answers2 = answers.map(answer => answer.split(' '));
 
-// I fucking give up on this for now
+for (let answer of answers2) {
+    const people = answer.length;
+    if (people == 1) { sum += answer[0].split('').length; continue; }
 
-// console.log(`The sum of the other count is ${sum} (answer for part two)`);
+    const answers = {};
+    answer.forEach(answered => {
+        answered = answered.split('');
+        answered.map(ans => {
+            if (!answers[ans]) answers[ans] = 0;
+            answers[ans]++;
+        })
+    });
+
+    for (const ans in answers) {
+        if (answers[ans] == people) sum += 1
+    }
+}
+
+console.log(`The sum of the other count is ${sum} (answer for part two)`);
